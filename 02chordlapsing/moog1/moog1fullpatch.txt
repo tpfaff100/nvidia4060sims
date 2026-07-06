@@ -1,0 +1,57 @@
+# fullpatch.txt — demonstrates every feature of the GPU Minimoog
+# run:  moog full.wav fullpatch.txt
+#
+# ─── OSCILLATOR BANK (all 10) ─────────────────────────────────────
+#   osc <i> <wave> <semitones> <cents> <level>
+osc 0 saw   0   -8   0.22        # classic detuned saw stack
+osc 1 saw   0    0   0.22
+osc 2 saw   0   +8   0.22
+osc 3 sqr -12    0   0.18        # sub square
+pw  3 0.42
+osc 4 sin -24    0   0.20        # deep sub sine
+osc 5 sin +12    0   0.08        # FM carrier (bell sparkle)
+fm  5 1 4.5                      #   ...modulated by osc 1, index 4.5
+osc 6 sin +19    0   0.05        # ring-mod voice
+ring 6 4                         #   ...multiplied by the sub sine
+osc 7 tri  +7    0   0.10        # quinty triangle
+osc 8 sqr   0   +3   0.10        # thin pulse
+pw  8 0.12
+osc 9 noise 0    0   0.03        # air
+
+# ─── MODULATION ───────────────────────────────────────────────────
+lfo 5.8 sin 0.08 0.06            # vibrato + gentle filter wobble
+sh  9.0 0.0 0.35                 # sample & hold -> filter (burbling)
+trem 5.2 0.15                    # tremolo
+
+# ─── MOOG LADDER FILTER ───────────────────────────────────────────
+#      cutoff  res  envAmt keytrk drive
+filter  260   0.78  0.75   0.6    1.7
+
+# ─── ENVELOPES ────────────────────────────────────────────────────
+aenv 0.004 0.30 0.60 0.35
+fenv 0.002 0.32 0.15 0.30
+glide 0.05
+
+# ─── FX BUS ───────────────────────────────────────────────────────
+chorus 0.5 0.005 0.4
+reverb 0.75 0.20
+
+# ─── SEQUENCE ─────────────────────────────────────────────────────
+#    start dur  midi vel
+note 0.4  0.30  36  1.0
+note 0.8  0.30  36  0.8
+note 1.2  0.30  43  0.9
+note 1.6  0.55  46  1.0
+note 2.4  0.30  48  0.9
+note 2.8  0.30  46  0.8
+note 3.2  0.30  43  0.9
+note 3.6  0.55  41  1.0
+note 4.4  0.30  36  1.0
+note 4.8  0.30  36  0.8
+note 5.2  0.30  43  0.9
+note 5.6  0.30  48  0.9
+note 6.0  0.30  51  1.0
+note 6.4  0.30  50  0.9
+note 6.8  0.30  46  0.8
+note 7.2  0.55  43  0.9
+note 8.2  3.00  36  1.0          # long closing note - hear the filter bloom
